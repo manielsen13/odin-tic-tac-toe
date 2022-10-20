@@ -70,51 +70,30 @@ const isGameOver = (board) => {
         }
     }
 
+    //make sure to check for a tie as well
     return false;
 }
 
 
+//make player factory
+const playerFactory = (playerName, playerSymbol) => {
 
+    const playerSymbol = playerSymbol;
+    const playerName = playerName;
 
+    const makeMove = (spaceNumber) => {
+        board.markSpace(spaceNumber, playerSymbol);
 
+    }
 
-
-  
-
-
-//create user module
-function user() {
-
+    return {playerSymbol, playerName, makeMove};
 }
 
-//create computer/AI module
-function computerPlayer {
 
-}
+
+
+  //number spaces via index 0 thru 8
+
+
 
 //create game module
-
-
-//factory example
-const personFactory = (name, age) => {
-    const sayHello = () => console.log('hello!');
-    return { name, age, sayHello };
-  };
-
-//module example
-const calculator = (() => {
-    const add = (a, b) => a + b;
-    const sub = (a, b) => a - b;
-    const mul = (a, b) => a * b;
-    const div = (a, b) => a / b;
-    return {
-      add,
-      sub,
-      mul,
-      div,
-    };
-  })();
-  
-  calculator.add(3,5); // 8
-  calculator.sub(6,2); // 4
-  calculator.mul(14,5534); // 77476
