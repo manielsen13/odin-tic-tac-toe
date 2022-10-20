@@ -7,13 +7,43 @@ button {
 
 #menuScreen {
     display: flex;
-    flex-direction: column;
     font-size: 20px;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    justify-content: center;
+    align-items: center;
+
+    width: 100vw;
+    height: 100vh;
+
+    z-index: 10;
+
+    background-color: white;
+}
+
+#menuWrapper {
+    display: flex;
+    flex-direction: column;
     gap: 20px;
 
     justify-content: center;
     align-items: center;
-    padding: 20vw;
+
+    padding-left: 20vw;
+    padding-right: 20vw;
+}
+
+#gameScreen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100vw;
+    height: 100vh;
+
 }
 
 

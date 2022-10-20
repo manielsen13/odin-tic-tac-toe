@@ -205,7 +205,7 @@ const renderBoard = () => {
 }
 
 
-//create a home screen where players can enter their names before the game starts.
+//add functionality to home screen (the start button and the text fields for the name entries)
 
 //create function to display a winning screen or title thing upon winning
 //display a button to start over(reset the page)
