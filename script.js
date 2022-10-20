@@ -34,6 +34,56 @@ const board = (() => {
     return {spaces, markSpace};   
   })();
 
+//make player factory
+const playerFactory = (playerName, playerSymbol) => {
+
+    const playerSymbol = playerSymbol;
+    const playerName = playerName;
+
+    const makeMove = (spaceNumber) => {
+        board.markSpace(spaceNumber, playerSymbol);
+
+    }
+
+    return {playerSymbol, playerName, makeMove};
+}
+
+
+//create gameMaster Module
+const gameMaster = (() => {
+    const counter = 1;
+
+    const whoseTurn = () => {
+        if (counter % 2 == 1) {
+            return "player1";
+        }
+        else {
+            return "player2";
+        }
+    }
+
+    const switchTurn = () => {
+        counter++;
+    }
+})();
+
+//create game module
+const game = (() => {
+
+    const play = () => {
+        const player1 = playerFactory("John", "X");
+        const player2 = playerFactory("Tom", "O")
+
+    }
+
+    const reset = () => {
+        window.location.reload();
+    }
+
+})();
+
+
+
 //checks if game is over and returns whether it is or not
 const isGameOver = (board) => {
     
@@ -75,19 +125,7 @@ const isGameOver = (board) => {
 }
 
 
-//make player factory
-const playerFactory = (playerName, playerSymbol) => {
 
-    const playerSymbol = playerSymbol;
-    const playerName = playerName;
-
-    const makeMove = (spaceNumber) => {
-        board.markSpace(spaceNumber, playerSymbol);
-
-    }
-
-    return {playerSymbol, playerName, makeMove};
-}
 
 
 
