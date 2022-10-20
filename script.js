@@ -106,6 +106,7 @@ const gameMaster = (() => {
 
 
 //checks if game is over and returns whether it is or not
+//make sure to check for ties as well here.
 const isGameOver = () => {
     
     const spaces = board.spaces;
@@ -164,12 +165,6 @@ const configSpaceDiv = (mySpaceDiv, spaceNum) => {
         gameMaster.makeMove(spaceNum);
 
         this.textContent = board.spaces[spaceNum].getMark();
-
-
-        //mark the space of the div
-
-
-
     })
 
 
@@ -188,11 +183,13 @@ const renderBoard = () => {
 }
 
 
+//create a home screen where players can enter their names before the game starts.
+
+
+
 //create function to deactivate the board upon winning
 //create function to display a winning screen or title thing upon winning
 //display a button to start over(reset the page)
-
-
-
+//make sure to listen for ties as well
 
 renderBoard();
