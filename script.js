@@ -4,22 +4,16 @@ const spaceFactory = () => {
     let  mark = "N/A";
 
     let isFilled = () => {
-        console.log(mark);
         if (mark === "N/A") {
-            console.log("it's not filled")
             return false;
             
         } else {
-            console.log("it is filled")
             return true;
         }
     }
 
     let makeMark = (theSymbol) => {
-        console.log("I MADE A MARK")
-        console.log(theSymbol)
         mark = theSymbol;
-        console.log(mark);
 
     }
 
@@ -91,6 +85,9 @@ const gameMaster = (() => {
     const makeMove = (spaceNumber) => {
         if (!board.spaces[spaceNumber].isFilled()) {
             board.spaces[spaceNumber].makeMark(activePlayer().playerSymbol);
+            if (isGameOver()) {
+                console.log(activePlayer().playerName + " is the Winner!");
+            }
             changeTurns();
         }
         
@@ -114,32 +111,32 @@ const isGameOver = () => {
     const spaces = board.spaces;
 
     if (spaces[0].isFilled()) {
-        if (spaces[0].mark == spaces[1].mark && spaces[1].mark == spaces[2].mark) {
+        if (spaces[0].getMark() == spaces[1].getMark() && spaces[1].getMark() == spaces[2].getMark()) {
             return true;
         }
-        if (spaces[0].mark == spaces[3].mark && spaces[3].mark == spaces[6].mark) {
+        if (spaces[0].getMark() == spaces[3].getMark() && spaces[3].getMark() == spaces[6].getMark()) {
             return true;
         }
-        if (spaces[0].mark == spaces[4].mark && spaces[4].mark == spaces[8].mark) {
+        if (spaces[0].getMark() == spaces[4].getMark() && spaces[4].getMark() == spaces[8].getMark()) {
             return true;
         }
     }
     if (spaces[4].isFilled()) {
-        if (spaces[4].mark == spaces[3].mark && spaces[3].mark == spaces[5].mark) {
+        if (spaces[4].getMark() == spaces[3].getMark() && spaces[3].getMark() == spaces[5].getMark()) {
             return true;
         }
-        if (spaces[4].mark == spaces[1].mark && spaces[1].mark == spaces[7].mark) {
+        if (spaces[4].getMark() == spaces[1].getMark() && spaces[1].getMark() == spaces[7].getMark()) {
             return true;
         }
-        if (spaces[4].mark == spaces[2].mark && spaces[2].mark == spaces[6].mark) {
+        if (spaces[4].getMark() == spaces[2].getMark() && spaces[2].getMark() == spaces[6].getMark()) {
             return true;
         }
     }
     if (spaces[8].isFilled()) {
-        if (spaces[6].mark == spaces[7].mark && spaces[7].mark == spaces[8].mark) {
+        if (spaces[6].getMark() == spaces[7].getMark() && spaces[7].getMark() == spaces[8].getMark()) {
             return true;
         }
-        if (spaces[2].mark == spaces[5].mark && spaces[5].mark == spaces[8].mark) {
+        if (spaces[2].getMark() == spaces[5].getMark() && spaces[5].getMark() == spaces[8].getMark()) {
             return true;
         }
     }
