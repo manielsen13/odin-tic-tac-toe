@@ -1,5 +1,5 @@
 //create space factory
-function spaceFactory() {
+const spaceFactory = () => {
 
     const mark = "";
 
@@ -13,6 +13,8 @@ function spaceFactory() {
     const markSpace = (symbol) => {
         mark = symbol;
     }
+
+    return {mark, isFilled, markSpace}
 }
 
 
