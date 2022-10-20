@@ -60,6 +60,7 @@ const playerFactory = (pName, pSymbol) => {
 //create game module
 const gameMaster = (() => {
 
+    let gameOver = false;
     let turnCounter = 1;
     const player1 = playerFactory("Player 1", "X");
     const player2 = playerFactory("Player 2", "O");
@@ -85,8 +86,13 @@ const gameMaster = (() => {
     const makeMove = (spaceNumber) => {
         if (!board.spaces[spaceNumber].isFilled()) {
             board.spaces[spaceNumber].makeMark(activePlayer().playerSymbol);
-            if (isGameOver()) {
+            if (isGameOver() == "Win") {
                 console.log(activePlayer().playerName + " is the Winner!");
+                gameMaster.gameOver = true;
+            }
+            if (isGameOver() == "Draw") {
+                console.log("Game is a DRAW!");
+                gameMaster.gameOver = true;
             }
             changeTurns();
         }
@@ -99,7 +105,7 @@ const gameMaster = (() => {
         
     }
 
-    return {activePlayer, makeMove, reset}
+    return {activePlayer, makeMove, reset, gameOver}
 
 })();
 
@@ -113,36 +119,48 @@ const isGameOver = () => {
 
     if (spaces[0].isFilled()) {
         if (spaces[0].getMark() == spaces[1].getMark() && spaces[1].getMark() == spaces[2].getMark()) {
-            return true;
+            return "Win";
         }
         if (spaces[0].getMark() == spaces[3].getMark() && spaces[3].getMark() == spaces[6].getMark()) {
-            return true;
+            return "Win";
         }
         if (spaces[0].getMark() == spaces[4].getMark() && spaces[4].getMark() == spaces[8].getMark()) {
-            return true;
+            return "Win";
         }
     }
     if (spaces[4].isFilled()) {
         if (spaces[4].getMark() == spaces[3].getMark() && spaces[3].getMark() == spaces[5].getMark()) {
-            return true;
+            return "Win";
         }
         if (spaces[4].getMark() == spaces[1].getMark() && spaces[1].getMark() == spaces[7].getMark()) {
-            return true;
+            return "Win";
         }
         if (spaces[4].getMark() == spaces[2].getMark() && spaces[2].getMark() == spaces[6].getMark()) {
-            return true;
+            return "Win";
         }
     }
     if (spaces[8].isFilled()) {
         if (spaces[6].getMark() == spaces[7].getMark() && spaces[7].getMark() == spaces[8].getMark()) {
-            return true;
+            return "Win";
         }
         if (spaces[2].getMark() == spaces[5].getMark() && spaces[5].getMark() == spaces[8].getMark()) {
-            return true;
+            return "Win";
         }
     }
-    //make sure to check for a tie as well
-    return false;
+
+
+    //check for game not being over
+    for (let i = 0; i < 9; i++) {
+        if (spaces[i].isFilled() == false) {
+            return "Not Over";
+        }
+    }
+    
+
+    //return draw if all spaces are taken up and no one is declared the winner.
+    return "Draw";
+    
+    
 }
 
   //number spaces via index 0 thru 8
@@ -159,12 +177,15 @@ const configSpaceDiv = (mySpaceDiv, spaceNum) => {
 
     //make do things when pressed.
     mySpaceDiv.addEventListener("click", function () {
-        this.style.backgroundColor = "red";
-        const spaceNum = this.getAttribute("space-number")
 
-        gameMaster.makeMove(spaceNum);
-
-        this.textContent = board.spaces[spaceNum].getMark();
+        if (gameMaster.gameOver == false) {
+            this.style.backgroundColor = "red";
+            const spaceNum = this.getAttribute("space-number")
+    
+            gameMaster.makeMove(spaceNum);
+    
+            this.textContent = board.spaces[spaceNum].getMark();
+        }
     })
 
 
