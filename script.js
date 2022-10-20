@@ -1,7 +1,7 @@
 //create space factory
 const spaceFactory = () => {
 
-    const mark = "";
+    let  mark = " ";
 
     const isFilled = () => {
         if (mark != "") {
@@ -10,11 +10,8 @@ const spaceFactory = () => {
             return false;
         }
     }
-    const makeMark = (symbol) => {
-        mark = symbol;
-    }
 
-    return {mark, isFilled, makeMark};
+    return {mark, isFilled};
 }
 
 //create board module
@@ -28,7 +25,7 @@ const board = (() => {
     })();
 
     const markSpace = (spaceNumber, symbol) => {
-        spaces[spaceNumber].makeMark(symbol);
+        spaces[spaceNumber].mark = symbol;
     }
 
     return {spaces, markSpace};   
@@ -40,49 +37,43 @@ const playerFactory = (pName, pSymbol) => {
     const playerSymbol = pSymbol;
     const playerName = pName;
 
-    const makeMove = (spaceNumber) => {
-        board.markSpace(spaceNumber, playerSymbol);
-
-    }
-
-    return {playerSymbol, playerName, makeMove};
+    return {playerSymbol, playerName};
 }
 
 
-//create gameMaster Module
-const gameMaster = (() => {
-    const counter = 1;
 
-    const whoseTurn = () => {
-        if (counter % 2 == 1) {
-            return "player1";
-        }
-        else {
-            return "player2";
-        }
-    }
-
-    const switchTurn = () => {
-        counter++;
-    }
-
-    //this function is called when one of the square are clicked.
-    const makeTurn = () => {
-
-    }
-})();
 
 //create game module
 const game = (() => {
 
+    let turnCounter = 1;
     const player1 = playerFactory("Player 1", "X");
     const player2 = playerFactory("Player 2", "O");
+
+    const changeTurns = () => {
+        turnCounter++;
+    }
 
     const reset = () => {
         window.location.reload();
     }
 
-    return {player1, player2, reset}
+    const activePlayer = () => {
+        if (turnCounter % 2 == 1) {
+            return player1;
+        }
+        else {
+            return player2;
+        }
+    }
+
+    //this function is called when one of the square are clicked.
+    const makeMove = (spaceNumber) => {
+        board.markSpace(spaceNumber, activePlayer().playerSymbol);
+        changeTurns();
+    }
+
+    return {activePlayer, makeMove, reset}
 
 })();
 
@@ -134,10 +125,26 @@ const configSpaceDiv = (mySpaceDiv, spaceNum) => {
 
     mySpaceDiv.classList.add("space");
     mySpaceDiv.setAttribute("space-number", spaceNum);
+
+
+
+
+
     //make do things when pressed.
     mySpaceDiv.addEventListener("click", function () {
         this.style.backgroundColor = "red";
-        console.log(this.getAttribute("space-number"))
+        const spaceNum = this.getAttribute("space-number")
+
+        game.makeMove(spaceNum);
+        console.log(board.spaces[spaceNum]);
+
+        this.textContent = board.spaces[spaceNum].mark;
+
+
+        //mark the space of the div
+
+
+
     })
 
 
