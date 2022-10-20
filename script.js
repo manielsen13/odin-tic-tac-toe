@@ -20,11 +20,11 @@ const spaceFactory = () => {
 
 
 
-//creat board module
+//create board module
 const board = (() => {
     const spaces = [];
 
-    (function (spaces) {
+    (function () {
         for (let i = 0; i<9; i++) {
             spaces.push(spaceFactory());
         }
@@ -34,17 +34,53 @@ const board = (() => {
         spaces[spaceNumber].makeMark(symbol);
     }
 
-
-    const checkForWin = () => {
-        //make a check for win function
-
-    }
-    
     
   })();
 
+//checks if game is over and returns whether it is or not
+const isGameOver = (board) => {
+    
+    const spaces = board.spaces;
 
-  
+    if (spaces[0].isFilled()) {
+        if (spaces[0].mark == spaces[1].mark && spaces[1].mark == spaces[2].mark) {
+            return true;
+        }
+        if (spaces[0].mark == spaces[3].mark && spaces[3].mark == spaces[6].mark) {
+            return true;
+        }
+        if (spaces[0].mark == spaces[4].mark && spaces[4].mark == spaces[8].mark) {
+            return true;
+        }
+    }
+    if (spaces[4].isFilled()) {
+        if (spaces[4].mark == spaces[3].mark && spaces[3].mark == spaces[5].mark) {
+            return true;
+        }
+        if (spaces[4].mark == spaces[1].mark && spaces[1].mark == spaces[7].mark) {
+            return true;
+        }
+        if (spaces[4].mark == spaces[2].mark && spaces[2].mark == spaces[6].mark) {
+            return true;
+        }
+    }
+    if (spaces[8].isFilled()) {
+        if (spaces[6].mark == spaces[7].mark && spaces[7].mark == spaces[8].mark) {
+            return true;
+        }
+        if (spaces[2].mark == spaces[5].mark && spaces[5].mark == spaces[8].mark) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+
+
+
+
+
 
   
 
