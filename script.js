@@ -17,9 +17,6 @@ const spaceFactory = () => {
     return {mark, isFilled, makeMark};
 }
 
-
-
-
 //create board module
 const board = (() => {
     const spaces = [];
@@ -34,7 +31,7 @@ const board = (() => {
         spaces[spaceNumber].makeMark(symbol);
     }
 
-    
+    return {spaces, markSpace};   
   })();
 
 //checks if game is over and returns whether it is or not
