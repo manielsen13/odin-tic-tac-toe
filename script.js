@@ -187,4 +187,12 @@ const renderBoard = () => {
     }
 }
 
+
+//create function to deactivate the board upon winning
+//create function to display a winning screen or title thing upon winning
+//display a button to start over(reset the page)
+
+
+
+
 renderBoard();
