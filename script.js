@@ -70,15 +70,14 @@ const gameMaster = (() => {
 //create game module
 const game = (() => {
 
-    const play = () => {
-        const player1 = playerFactory("John", "X");
-        const player2 = playerFactory("Tom", "O")
-
-    }
+    const player1 = playerFactory("Player 1", "X");
+    const player2 = playerFactory("Player 2", "O");
 
     const reset = () => {
         window.location.reload();
     }
+
+    return {player1, player2, reset}
 
 })();
 
