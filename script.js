@@ -65,6 +65,11 @@ const gameMaster = (() => {
     const switchTurn = () => {
         counter++;
     }
+
+    //this function is called when one of the square are clicked.
+    const makeTurn = () => {
+
+    }
 })();
 
 //create game module
@@ -133,7 +138,7 @@ const renderBoard = () => {
         let spaceDiv = document.createElement("div");
         spaceDiv.classList.add("space");
         spaceDiv.setAttribute("space-number", i);
-        //add an onclick function to these
+        //add an onclick function to these that marks them if clicked.
         boardDiv.appendChild(spaceDiv);
     }
 }
