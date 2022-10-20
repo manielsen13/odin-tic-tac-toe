@@ -207,8 +207,7 @@ const renderBoard = () => {
 
 //add functionality to home screen (the start button and the text fields for the name entries)
 
-//create function to display a winning screen or title thing upon winning
-//display a button to start over(reset the page)
-//make sure to listen for ties as well
+//create function to display a game over screen (or adapt the game screne) announcing the winner
+//on the game over page, display a button to start over(reset the page)
 
 renderBoard();
