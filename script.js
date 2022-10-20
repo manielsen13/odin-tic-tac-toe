@@ -10,21 +10,44 @@ const spaceFactory = () => {
             return false;
         }
     }
-    const markSpace = (symbol) => {
+    const makeMark = (symbol) => {
         mark = symbol;
     }
 
-    return {mark, isFilled, markSpace};
+    return {mark, isFilled, makeMark};
 }
 
 
 
 
 //creat board module
-function board(){
-    const spaces = [9];
+const board = (() => {
+    const spaces = [];
+
+    (function (spaces) {
+        for (let i = 0; i<9; i++) {
+            spaces.push(spaceFactory());
+        }
+    })();
+
+    const markSpace = (spaceNumber, symbol) => {
+        spaces[spaceNumber].makeMark(symbol);
+    }
+
+
+    const checkForWin = () => {
+        //make a check for win function
+
+    }
     
-}
+    
+  })();
+
+
+  
+
+  
+
 
 //create user module
 function user() {
