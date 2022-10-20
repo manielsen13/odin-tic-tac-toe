@@ -14,7 +14,7 @@ const spaceFactory = () => {
         mark = symbol;
     }
 
-    return {mark, isFilled, markSpace}
+    return {mark, isFilled, markSpace};
 }
 
 
