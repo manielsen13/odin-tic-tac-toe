@@ -159,8 +159,7 @@ const isGameOver = () => {
 
     //return draw if all spaces are taken up and no one is declared the winner.
     return "Draw";
-    
-    
+
 }
 
   //number spaces via index 0 thru 8
@@ -178,8 +177,10 @@ const configSpaceDiv = (mySpaceDiv, spaceNum) => {
     //make do things when pressed.
     mySpaceDiv.addEventListener("click", function () {
 
+        //only works if the game isn't over
         if (gameMaster.gameOver == false) {
-            this.style.backgroundColor = "red";
+            this.style.backgroundColor = "whitesmoke";
+            this.style.border = "solid 2px black"
             const spaceNum = this.getAttribute("space-number")
     
             gameMaster.makeMove(spaceNum);
@@ -206,9 +207,6 @@ const renderBoard = () => {
 
 //create a home screen where players can enter their names before the game starts.
 
-
-
-//create function to deactivate the board upon winning
 //create function to display a winning screen or title thing upon winning
 //display a button to start over(reset the page)
 //make sure to listen for ties as well
