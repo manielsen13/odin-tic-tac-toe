@@ -129,6 +129,19 @@ const isGameOver = () => {
 
   //number spaces via index 0 thru 8
 
+//config spaceDivs
+const configSpaceDiv = (mySpaceDiv, spaceNum) => {
+
+    mySpaceDiv.classList.add("space");
+    mySpaceDiv.setAttribute("space-number", spaceNum);
+    //make do things when pressed.
+    mySpaceDiv.addEventListener("click", function () {
+        this.style.backgroundColor = "red";
+        console.log(this.getAttribute("space-number"))
+    })
+
+
+}
 
 //make and render HTML elements
 const renderBoard = () => {
@@ -136,9 +149,8 @@ const renderBoard = () => {
 
     for (let i=0; i<9; i++) {
         let spaceDiv = document.createElement("div");
-        spaceDiv.classList.add("space");
-        spaceDiv.setAttribute("space-number", i);
-        //add an onclick function to these that marks them if clicked.
+        
+        configSpaceDiv(spaceDiv, i);
         boardDiv.appendChild(spaceDiv);
     }
 }
