@@ -1,34 +1,54 @@
 //create space factory
 const spaceFactory = () => {
 
-    let  mark = " ";
+    let  mark = "N/A";
 
-    const isFilled = () => {
-        if (mark != "") {
-            return true;
-        } else {
+    let isFilled = () => {
+        console.log(mark);
+        if (mark === "N/A") {
+            console.log("it's not filled")
             return false;
+            
+        } else {
+            console.log("it is filled")
+            return true;
         }
     }
 
-    return {mark, isFilled};
+    let makeMark = (theSymbol) => {
+        console.log("I MADE A MARK")
+        console.log(theSymbol)
+        mark = theSymbol;
+        console.log(mark);
+
+    }
+
+    let getMark = () => {
+        return mark;
+    }
+
+    return {isFilled, makeMark, getMark};
 }
+//THE SYMBOL IS UNDEFINED AS I PLUG IT IN
+//SO TO ANSWER MY QUESTION--WHY IS MARK NOW UNDEFINED?
+
+
+
+
 
 //create board module
 const board = (() => {
+
     const spaces = [];
 
     (function () {
         for (let i = 0; i<9; i++) {
-            spaces.push(spaceFactory());
+            let newSpace = spaceFactory();
+            spaces.push(newSpace);
         }
     })();
 
-    const markSpace = (spaceNumber, symbol) => {
-        spaces[spaceNumber].mark = symbol;
-    }
-
-    return {spaces, markSpace};   
+    return {spaces};   
   })();
 
 //make player factory
@@ -44,7 +64,7 @@ const playerFactory = (pName, pSymbol) => {
 
 
 //create game module
-const game = (() => {
+const gameMaster = (() => {
 
     let turnCounter = 1;
     const player1 = playerFactory("Player 1", "X");
@@ -69,8 +89,17 @@ const game = (() => {
 
     //this function is called when one of the square are clicked.
     const makeMove = (spaceNumber) => {
-        board.markSpace(spaceNumber, activePlayer().playerSymbol);
-        changeTurns();
+        if (!board.spaces[spaceNumber].isFilled()) {
+            board.spaces[spaceNumber].makeMark(activePlayer().playerSymbol);
+            changeTurns();
+        }
+        
+//if this doesn't work, need to check if player symbols work
+        
+        //board.markSpace(spaceNumber, activePlayer().playerSymbol);
+       
+
+        
     }
 
     return {activePlayer, makeMove, reset}
@@ -135,10 +164,9 @@ const configSpaceDiv = (mySpaceDiv, spaceNum) => {
         this.style.backgroundColor = "red";
         const spaceNum = this.getAttribute("space-number")
 
-        game.makeMove(spaceNum);
-        console.log(board.spaces[spaceNum]);
+        gameMaster.makeMove(spaceNum);
 
-        this.textContent = board.spaces[spaceNum].mark;
+        this.textContent = board.spaces[spaceNum].getMark();
 
 
         //mark the space of the div
