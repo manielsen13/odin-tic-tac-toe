@@ -35,10 +35,10 @@ const board = (() => {
   })();
 
 //make player factory
-const playerFactory = (playerName, playerSymbol) => {
+const playerFactory = (pName, pSymbol) => {
 
-    const playerSymbol = playerSymbol;
-    const playerName = playerName;
+    const playerSymbol = pSymbol;
+    const playerName = pName;
 
     const makeMove = (spaceNumber) => {
         board.markSpace(spaceNumber, playerSymbol);
@@ -84,7 +84,7 @@ const game = (() => {
 
 
 //checks if game is over and returns whether it is or not
-const isGameOver = (board) => {
+const isGameOver = () => {
     
     const spaces = board.spaces;
 
@@ -118,19 +118,24 @@ const isGameOver = (board) => {
             return true;
         }
     }
-
     //make sure to check for a tie as well
     return false;
 }
 
-
-
-
-
-
-
   //number spaces via index 0 thru 8
 
 
+//make and render HTML elements
+const renderBoard = () => {
+    let boardDiv = document.getElementById("board");
 
-//create game module
+    for (let i=0; i<9; i++) {
+        let spaceDiv = document.createElement("div");
+        spaceDiv.classList.add("space");
+        spaceDiv.setAttribute("space-number", i);
+        //add an onclick function to these
+        boardDiv.appendChild(spaceDiv);
+    }
+}
+
+renderBoard();
