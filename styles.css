@@ -1,8 +1,13 @@
 button {
     padding: 10px;
-    border: none;
+    border: solid 2px whitesmoke;
     background-color: antiquewhite;
     width: fit-content;
+}
+
+button:hover {
+    border: solid 2px black;
+
 }
 
 #menuScreen {

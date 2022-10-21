@@ -69,10 +69,6 @@ const gameMaster = (() => {
         turnCounter++;
     }
 
-    const reset = () => {
-        window.location.reload();
-    }
-
     const activePlayer = () => {
         if (turnCounter % 2 == 1) {
             return player1;
@@ -96,16 +92,26 @@ const gameMaster = (() => {
             }
             changeTurns();
         }
-        
-//if this doesn't work, need to check if player symbols work
-        
-        //board.markSpace(spaceNumber, activePlayer().playerSymbol);
-       
-
-        
     }
 
-    return {activePlayer, makeMove, reset, gameOver}
+    const setPlayer1Name = (newName) => {
+        player1.playerName = newName;
+    }
+
+    const setPlayer2Name = (newName) => {
+        player2.playerName = newName;
+    }
+
+    const getPlayer1Name = () => {
+        return player1.playerName;
+    }
+
+    const getPlayer2Name = () => {
+        return player2.playerName;
+    }
+
+
+    return {activePlayer, makeMove, setPlayer1Name, setPlayer2Name, getPlayer1Name, getPlayer2Name, gameOver}
 
 })();
 
@@ -204,10 +210,30 @@ const renderBoard = () => {
     }
 }
 
+const configMenuScreen = () => {
+    let menuScreenDiv = document.getElementById("menuScreen");
+    let startButton = document.getElementById("startButton");
+    let p1NameInput = document.getElementById("player1_name");
+    let p2NameInput = document.getElementById("player2_name");
 
-//add functionality to home screen (the start button and the text fields for the name entries)
+    startButton.addEventListener("click", function() {
+        //remove menu screen
+        menuScreenDiv.style.display = "none";
+
+        //set player names to input values
+        gameMaster.setPlayer1Name(p1NameInput.value);
+        gameMaster.setPlayer2Name(p2NameInput.value);
+    })
+
+
+
+}
+
+const startGame = () => {
+
+}
 
 //create function to display a game over screen (or adapt the game screne) announcing the winner
 //on the game over page, display a button to start over(reset the page)
-
+configMenuScreen();
 renderBoard();
