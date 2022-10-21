@@ -54,7 +54,29 @@ const playerFactory = (pName, pSymbol) => {
     return {playerSymbol, playerName};
 }
 
+const configRestartButton = (myButton) => {
+
+    myButton.addEventListener("click", function() {
+        window.location.reload();
+    })
+}
+
 //write a function that does stuff when the game is over.
+const displayGameOverScreen = (gameOutcome, winningPlayer) => {
+    let announcerDiv = document.getElementById("announcer");
+    let restartButton = document.getElementById("restartButton");
+
+    configRestartButton(restartButton);
+
+    console.log(gameOutcome);
+    if(gameOutcome == "Win") {
+        announcerDiv.textContent = winningPlayer.playerName + " WINS!";
+    } else {
+        announcerDiv.textContent = "It's a draw!"
+    }
+
+    restartButton.style.display = "block";
+}
 
 
 
@@ -85,10 +107,12 @@ const gameMaster = (() => {
             board.spaces[spaceNumber].makeMark(activePlayer().playerSymbol);
             if (isGameOver() == "Win") {
                 console.log(activePlayer().playerName + " is the Winner!");
+                displayGameOverScreen(isGameOver(), activePlayer());
                 gameMaster.gameOver = true;
             }
             if (isGameOver() == "Draw") {
                 console.log("Game is a DRAW!");
+                displayGameOverScreen(isGameOver(), activePlayer());
                 gameMaster.gameOver = true;
             }
             changeTurns();
@@ -119,7 +143,6 @@ const gameMaster = (() => {
 
 
 //checks if game is over and returns whether it is or not
-//make sure to check for ties as well here.
 const isGameOver = () => {
     
     const spaces = board.spaces;
