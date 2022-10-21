@@ -54,6 +54,7 @@ const playerFactory = (pName, pSymbol) => {
     return {playerSymbol, playerName};
 }
 
+//write a function that does stuff when the game is over.
 
 
 
